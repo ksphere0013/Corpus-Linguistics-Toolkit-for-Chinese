@@ -1,0 +1,4 @@
+.venv
+data/preprocessed
+data/pos_tagged
+data/results

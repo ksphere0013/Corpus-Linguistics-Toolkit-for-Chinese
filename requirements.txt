@@ -1,0 +1,6 @@
+requests
+beautifulsoup4
+opencc-python-reimplemented
+selenium
+matplotlib
+jieba

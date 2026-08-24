@@ -1,0 +1,32 @@
+! the tagset is taken from jieba's github page. (https://github.com/fxsjy/jieba)
+Tag	Meaning	Meaning in English
+n	普通名词	common noun
+f	方位名词	locative noun
+s	处所名词	place noun
+t	时间	time word
+nr	人名	person name
+ns	地名	place name
+nt	机构名	organization name
+nw	作品名	work/title name
+nz	其他专名	other proper noun
+v	普通动词	verb
+vd	动副词	adverbial verb
+vn	名动词	nominal verb
+a	形容词	adjective
+ad	副形词	adverbial adjective
+an	名形词	nominal adjective
+d	副词	adverb
+m	数量词	numeral
+q	量词	classifier/quantifier
+r	代词	pronoun
+p	介词	preposition
+c	连词	conjunction
+u	助词	particle
+xc	其他虚词	other function word
+w	标点符号	punctuation
+PER	人名	person name
+LOC	地名	location name
+ORG	机构名	organization name
+TIME	时间	time expression
+x	未知	unknown
+
