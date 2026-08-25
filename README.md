@@ -110,16 +110,19 @@ python -m Toolkit.frequency
 python -m Toolkit.corpus_analysis
 ```
 
-By default, it shows only basic document info and TTR result.
+By default, it shows only basic document info and TTR result:
 
 <details>
-<summary>Example output</summary>
+<summary> Show example output</summary>
+
 ```text
 Token count: 340277
 Type count: 23681
 TTR: 0.13
 ```
-<details>
+
+</details> 
+
 
 Use `--kwic` to include concordance analysis.
 
