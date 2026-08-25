@@ -19,7 +19,7 @@ Each article is stored as a separate UTF-8 JSON file with metadata in data/raw/.
 ## 3. Corpus Description
 The sample corpus consists of 159 online news articles written in Mandarin Chinese, with 340,277 tokens before stopword removal and 248,311 tokens after stopword removal.
 
-The original content is licensed by China Digital Times under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License (CC BY-NC-SA 3.0). The copyright and licensing information of the articles is preserved in the metadata.
+The original content is licensed by China Digital Times under the [Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License](https://creativecommons.org/licenses/by-nc-sa/3.0/) (CC BY-NC-SA 3.0). The copyright and licensing information of the articles is preserved in the metadata.
 
 ## 4. System Architecture
 
