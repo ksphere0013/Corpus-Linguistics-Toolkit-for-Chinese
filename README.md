@@ -53,7 +53,7 @@ flowchart TD
     E --> I[ngram.py]
     E --> J[corpus_search.py]
 
-    F --> I
+    F --> J
 
     G --> K[data/results]
     H --> K
