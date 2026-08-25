@@ -50,8 +50,8 @@ flowchart TD
 
     E --> G[frequency.py]
     E --> H[corpus_analysis.py]
-    E --> I[corpus_search.py]
-    E --> J[ngram.py]
+    E --> I[ngram.py]
+    E --> J[corpus_search.py]
 
     F --> I
 
@@ -119,6 +119,7 @@ Token count: 340277
 Type count: 23681
 TTR: 0.13
 ```
+<details>
 
 Use `--kwic` to include concordance analysis.
 
