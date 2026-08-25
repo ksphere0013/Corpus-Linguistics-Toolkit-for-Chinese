@@ -4,7 +4,7 @@
 This project is a corpus linguistics toolkit written in Python for the analysis of Chinese corpora. It offers tools for corpus corpus preprocessing, corpus search, frequency analysis, collocation analysis, concordance/KWIC analysis and n-gram analysis.
 
 ## 2. Data Collection Approach 
-The corpus was collected from the [China Digital Times (CDT) archive](https://chinadigitaltimes.net/chinese/) .
+The corpus was collected from the [China Digital Times (CDT)](https://chinadigitaltimes.net/chinese/) archive.
 
 The crawler uses `Selenium` to access the archive pages and collect article URLs, and `BeautifulSoup` to extract article content and metadata from individual pages. Articles without author information are excluded.
 
@@ -22,9 +22,6 @@ The sample corpus consists of 159 online news articles written in Mandarin Chine
 The original content is licensed by China Digital Times under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License (CC BY-NC-SA 3.0). The copyright and licensing information of the articles is preserved in the metadata.
 
 ## 4. System Architecture
-### 4.1. preprocessing
-
-## 4. System Architecture
 
 The toolkit is organized as a modular command-line pipeline. Each module
 performs a specific corpus-processing or analysis task and operates on
@@ -32,21 +29,15 @@ JSON-formatted corpus data.
 
 The overall workflow is:
 
-Raw corpus
-→ Preprocessing
-→ Processed corpus
-→ Corpus analysis / Frequency analysis / Corpus search / N-gram analysis
-→ Analysis results
-
 ```mermaid
 flowchart TD
     A[Source Website] --> B[crawler.py]
-    B --> C[data/raw]
+    B --> C[data/raw/]
 
     C --> D[preprocessing.py]
 
-    D --> E[data/preprocessed]
-    D --> F[data/pos_tagged]
+    D --> E[data/preprocessed/]
+    D --> F[data/pos_tagged/]
 
     E --> G[frequency.py]
     E --> H[corpus_analysis.py]
@@ -55,10 +46,18 @@ flowchart TD
 
     F --> J
 
-    G --> K[data/results]
+    G --> K[data/results/]
     H --> K
     I --> K
     J --> K
+
+    classDef python fill:#e8f0fe,stroke:#4285f4,stroke-width:1.5px,color:#1a1a1a;
+    classDef data fill:#f3f3f3,stroke:#888,stroke-width:1px,color:#333;
+    classDef source fill:#fff3cd,stroke:#d6a700,stroke-width:1px,color:#333;
+
+    class B,D,G,H,I,J python;
+    class C,E,F,K data;
+    class A source;
 ```
 
 ### Main Components
