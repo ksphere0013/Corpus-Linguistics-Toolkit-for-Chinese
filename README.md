@@ -17,7 +17,7 @@
 
 ## Usage Instruction with Example Commands
 
- 1. preprocessing (POS tagging included); 
+### 1. preprocessing (POS tagging included); 
     optionally with document filtering based on metadata parameter(s):
     ```
     python -m Toolkit.preprocessing --license "CC BY-NC-SA 3.0" --genre "Online News Article"
