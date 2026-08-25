@@ -14,8 +14,7 @@ For each article, the crawler extracts the `title`, `author`, `source`, `publica
 
 Each article is stored as a separate UTF-8 JSON file with metadata in data/raw/.
 
-The toolkit includes `crawler.py` as a reference implementation. It is intended for reference rather than direct reuse, as web scraping code generally needs to be adapted to the structure and layout of the target website.
-> **Note:** The `crawler.py` is provided for reference only and may require adaptation to different website layouts.
+> *The `crawler.py` is provided in the toolkit for reference only and may require adaptation to different website layouts.*
 
 ## 3. Corpus Description
 The sample corpus consists of 159 online news articles written in Mandarin Chinese, with 340,277 tokens before stopword removal and 248,311 tokens after stopword removal.
@@ -83,7 +82,7 @@ The `crawler` produces the raw JSON corpus stored in `data/raw/`, which is passe
 
 The `preprocessing` module generates token-only data for general corpus analysis, saved in `data/preprocessed/`, and POS-tagged data, saved in `data/pos_tagged/`. 
 
-<sub>POS tagging is included in the preprocessing module because the chosen tokenizer `jieba` (a lightweight and widely used tokenizer for Chinese language) conduct both tokenization and POS tagging through its `jieba.posseg` module at the same time. </sub>
+> *POS tagging is included in the preprocessing module because the chosen tokenizer `jieba` (a lightweight and widely used tokenizer for Chinese language) conduct both tokenization and POS tagging through its `jieba.posseg` module at the same time.*
 
 The *preprocessed* and *pos_tagged* data can then be independently processed by the analysis modules. Analysis results, including frequency tables, collocations,
 search results, KWIC results, and N-gram statistics, are stored in `data/results/`.
@@ -97,8 +96,7 @@ optionally with document filtering based on metadata parameter(s):
 python -m Toolkit.preprocessing --license "CC BY-NC-SA 3.0" --genre "Online News Article"
 ```
 
-> [!NOTE]
-> Note: If your parameter has white space, put it in quotation marks "".
+> *Note: If your parameter has white space, put it in quotation marks ("").*
 
 ### 5.2. frequency analysis
 
@@ -114,7 +112,9 @@ python -m Toolkit.corpus_analysis
 
 By default, it shows only basic document info and TTR result.
 
-```
+<details>
+<summary>Example output</summary>
+```text
 Token count: 340277
 Type count: 23681
 TTR: 0.13
