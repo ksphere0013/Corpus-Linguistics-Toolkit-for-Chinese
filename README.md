@@ -401,30 +401,31 @@ python -m toolkit.corpus_search --keyword 女性 --regex "女.+" --pos ns --show
 <summary>Click here to show example output</summary>
 
 ```text
-------------------------------
-Corpus: data/preprocessed/
+--------------------------------------------------
+Corpus for keyword & regex search: data/preprocessed/
+Corpus for POS search: data/pos_tagged/
 Number of documents: 159
-------------------------------
+--------------------------------------------------
 > Keyword search: 女性
-------------------------------
+--------------------------------------------------
 Number of results: 220
 {'document_id': 'cdt_0031', 'position': 2044, 'token': '女性'}
 {'document_id': 'cdt_0031', 'position': 2054, 'token': '女性'}
 {'document_id': 'cdt_0031', 'position': 2247, 'token': '女性'}
 {'document_id': 'cdt_0035', 'position': 350, 'token': '女性'}
 {'document_id': 'cdt_0114', 'position': 89, 'token': '女性'}
-------------------------------
+--------------------------------------------------
 > Regex search: 女.+
-------------------------------
+--------------------------------------------------
 Number of results: 472
 {'document_id': 'cdt_0031', 'position': 2044, 'token': '女性'}
 {'document_id': 'cdt_0031', 'position': 2054, 'token': '女性'}
 {'document_id': 'cdt_0031', 'position': 2247, 'token': '女性'}
 {'document_id': 'cdt_0035', 'position': 350, 'token': '女性'}
 {'document_id': 'cdt_0075', 'position': 515, 'token': '子女教育'}
-------------------------------
+--------------------------------------------------
 > POS search: POS = ns
-------------------------------
+--------------------------------------------------
 Number of results: 8832
 {'document_id': 'cdt_0031', 'position': 17, 'token': '中国', 'pos': 'ns'}
 {'document_id': 'cdt_0031', 'position': 50, 'token': '中国', 'pos': 'ns'}
@@ -468,3 +469,9 @@ Several challenges were encountered during data collection, preprocessing, and c
 * **Displaying Chinese characters in visualizations.** Matplotlib's default font settings did not reliably support Chinese characters in plots. A Chinese-compatible font (`Microsoft YaHei`) was therefore configured for visualizations.
 
 * **Understanding collocation statistics.** Different collocation measures were initially unfamiliar, particularly their statistical interpretation and differences. Course materials and explanations from the course instructor were used to understand the measures and determine how they should be incorporated into the toolkit.
+
+> **Final Note:**
+
+> <sub>This is the end of this lengthy README. I doubt anyone would actually read this far, but anyway...<sub>
+
+> kudos to the CDT team for keeping an interesting corner of the Simplified Chinese internet alive <3 

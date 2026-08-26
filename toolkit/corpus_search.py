@@ -105,9 +105,9 @@ def pos_search(documents, pos_tag):
 # function for printing search results
 def print_results(results, title, limit=20):
 
-    print("-" * 30)
+    print("-" * 50)
     print(f"> {title}")
-    print("-" * 30)
+    print("-" * 50)
     print("Number of results:", len(results))
 
     for result in results[:limit]:
@@ -170,8 +170,9 @@ else:
 
 documents = load_corpus(corpus_dir)
 
-print("-" * 30)
-print("Corpus:", corpus_dir)
+print("-" * 50)
+print("Corpus for keyword & regex search:", corpus_dir)
+print("Corpus for POS search: data/pos_tagged/")
 print("Number of documents:", len(documents))
 
 # ============================================================
