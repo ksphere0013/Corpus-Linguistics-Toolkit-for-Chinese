@@ -52,10 +52,9 @@ Each document is stored as an individual JSON file. The corpus contains both art
   }
 }
 ```
+### **Disclaimer**
 
-The original content is licensed by China Digital Times under the [Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License (CC BY-NC-SA 3.0)](https://creativecommons.org/licenses/by-nc-sa/3.0/). The original copyright and licensing information is preserved in the metadata of each document.
-
-The corpus data is provided as a sample dataset for research and educational purposes. Users should comply with the terms of the original CC BY-NC-SA 3.0 license when using or redistributing the corpus data.
+This corpus was collected and processed for this project and is not an official dataset published by China Digital Times. The corpus is provided for research and educational purposes. Users are responsible for complying with the terms of the original [CC BY-NC-SA 3.0 license](https://creativecommons.org/licenses/by-nc-sa/3.0/) and any other applicable terms when using or redistributing the corpus.
 
 ## **4. System Architecture**
 
@@ -64,7 +63,7 @@ The toolkit is organized as a modular command-line pipeline. Each module perform
 The overall workflow is:
 
 ```mermaid
-flowchart TD
+flowchart LR
     C[data/raw/]
 
     C --> D[preprocessing.py]
@@ -85,8 +84,8 @@ flowchart TD
     I --> K
     J --> K
 
-    classDef python fill:#E8EEF2,stroke:#526777,stroke-width:2px,color:#263640;
-    classDef data fill:#F5F1E8,stroke:#9A8C70,stroke-width:2px,color:#4A4338;
+    classDef python fill:#DCEEFF,stroke:#1677D2,stroke-width:2px,color:#0A3D62;
+    classDef data fill:#F5F3EF,stroke:#A49D91,stroke-width:2px,color:#514C45;
 
     class D,G,H,I,J python;
     class C,E,F,K data;
@@ -113,7 +112,7 @@ The preprocessed and POS-tagged data can then be processed independently by the 
 
 See `installation.md` for installation instructions.
 
-### **General**
+---
 
 After installation, change the working directory in the terminal to the directory containing the `data` folder.
 
@@ -145,7 +144,7 @@ python -m toolkit.preprocessing -h
 
 ---
 
-### **Preprocessing (POS Tagging Included)**
+### **5.1 Preprocessing (POS Tagging Included)**
 
 The **`preprocessing`** module performs sentence segmentation, tokenization, POS tagging, punctuation removal, and stopword removal. It saves both token-only and POS-tagged versions of the preprocessed corpus.
 
@@ -206,7 +205,7 @@ POS-tagged documents saved to: data\pos_tagged
 
 ---
 
-### **Frequency Analysis**
+### **5.2 Frequency Analysis**
 
 The **`frequency`** module calculates word and character frequencies and provides visualizations of the most frequent items. It also performs collocation analysis using Mutual Information (MI), t-score, Dice coefficient, and log-likelihood.
 
@@ -294,7 +293,7 @@ Ranked collocation results saved to: data\results\collocations_ranked.json
 
 ---
 
-### **Corpus Analysis**
+### **5.3 Corpus Analysis**
 
 The **`corpus_analysis`** module provides basic corpus statistics, TTR, concordance analysis, and KWIC analysis.
 
@@ -341,7 +340,7 @@ KWIC results saved to: data\results\kwic_results.json
 
 ---
 
-### **N-gram Analysis**
+### **5.4 N-gram Analysis**
 
 The **`ngram`** module performs n-gram frequency analysis.
 
@@ -386,7 +385,7 @@ N-gram results saved to: data\results\ngram_results.json
 
 ---
 
-### **Corpus Search**
+### **5.5 Corpus Search**
 
 The **`corpus_search`** module supports keyword, regular expression, and part-of-speech (POS) searches.
 
