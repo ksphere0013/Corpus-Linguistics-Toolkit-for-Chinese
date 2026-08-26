@@ -125,12 +125,37 @@ The *preprocessed* and *pos_tagged* data can then be independently processed by 
 search results, KWIC results, and N-gram statistics, are stored in `data/results/`.
 
 ## **5. Usage Instruction with Example Commands and Output**
+See `installation.md` for installation instrucion.
+
+### **General**
+After installation, in your terminal, change directory to where your `data` folder is.
+For example, the path of my data folder is `A:\test\data\`, so I do:
+```bash
+cd A:\test\
+```
+Then, you can run each module in the toolkit from the same directory.
+---
+To use each module, run:
+```bash
+python -m toolkit.[module_name]
+```
+For example, 
+```bash
+python -m toolkit.preprocessing
+```
+For each module, use `-h` or `--help` to see instructions for different options. 
+```bash
+python -m toolkit.preprocessing [-h]
+```
+
+Some modules require at least one option to run. See examples below.
+---
 
 ### **Preprocessing (POS tagging included)**
 optionally with document filtering based on metadata parameter(s):
 
 ```bash
-python -m Toolkit.preprocessing --license "CC BY-NC-SA 3.0" --genre "Online News Article"
+python -m toolkit.preprocessing --license "CC BY-NC-SA 3.0" --genre "Online News Article"
 ```
 
 > *Note: If your parameter has white space, put it in quotation marks ("").*
@@ -138,13 +163,13 @@ python -m Toolkit.preprocessing --license "CC BY-NC-SA 3.0" --genre "Online News
 ### **Frequency Analysis**
 
 ```bash
-python -m Toolkit.frequency
+python -m toolkit.frequency
 ```
 
 ### **Corpus Analysis**
 
 ```bash
-python -m Toolkit.corpus_analysis
+python -m toolkit.corpus_analysis
 ```
 
 <details>
@@ -162,16 +187,16 @@ By default, it shows only basic document info and TTR result.
 To include concordance analysis, use `--kwic`.
 
 ```bash
-python -m Toolkit.corpus_analysis --kwic 女性
+python -m toolkit.corpus_analysis --kwic 女性
 ```
 
 ### **Corpus Search**
 ```bash
-python -m Toolkit.corpus_search
+python -m toolkit.corpus_search
 ```
 ### **N-gram Analysis**
 ```bash
-python -m Toolkit.ngram
+python -m toolkit.ngram
 ```
 
 ## **6. Challenges Faced**
