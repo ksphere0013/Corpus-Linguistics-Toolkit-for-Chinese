@@ -104,7 +104,9 @@ flowchart LR
     class D,G,H,I,J python;
     class C,E,F,K data;
 ```
-<sub> Overall Workflow of the Toolkit </sub>
+<p align="center">
+  <sub>Overall workflow of the toolkit</sub>
+</p>
 
 ### **Main Components**
 
