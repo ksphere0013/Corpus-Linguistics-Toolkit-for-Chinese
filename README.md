@@ -76,8 +76,6 @@ This corpus was collected and processed for this project and is not an official 
 
 The toolkit is organized as a modular command-line pipeline. Each module performs a specific corpus-processing or analysis task and operates on JSON-formatted corpus data.
 
-The overall workflow is:
-
 ```mermaid
 flowchart LR
     C[data/raw/]
@@ -106,6 +104,7 @@ flowchart LR
     class D,G,H,I,J python;
     class C,E,F,K data;
 ```
+<sub> Overall Workflow of the Toolkit </sub>
 
 ### **Main Components**
 
