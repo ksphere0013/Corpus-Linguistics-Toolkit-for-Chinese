@@ -1,4 +1,20 @@
 # **Corpus Linguistics Toolkit for Chinese**
+> A Python-based toolkit for collecting, preprocessing, searching, and analyzing Chinese-language corpora.
+
+## **Table of Contents**
+
+1. [Project Overview](#1-project-overview)
+2. [Data Collection](#2-data-collection)
+3. [Corpus Description](#3-corpus-description)
+4. [System Architecture](#4-system-architecture)
+5. [Usage Instructions and Example Commands](#5-usage-instructions-and-example-commands)
+   - [5.1 Preprocessing](#51-preprocessing)
+   - [5.2 Frequency Analysis](#52-frequency-analysis)
+   - [5.3 Corpus Analysis](#53-corpus-analysis)
+   - [5.4 N-gram Analysis](#54-n-gram-analysis)
+   - [5.5 Corpus Search](#55-corpus-search)
+6. [Challenges Faced](#6-challenges-faced)
+7. [Final Note](#7-final-note)
 
 ## **1. Project Overview**
 
@@ -32,6 +48,12 @@ The corpus contains:
 * **Documents:** 159
 * **Tokens before stopword removal:** 340,277
 * **Tokens after stopword removal:** 248,311
+
+| Measure | Value |
+|---|---:|
+| Documents | 159 |
+| Tokens before stopword removal | 340,277 |
+| Tokens after stopword removal | 248,311 |
 
 Each document is stored as an individual JSON file. The corpus contains both article text and structured metadata. For example:
 
