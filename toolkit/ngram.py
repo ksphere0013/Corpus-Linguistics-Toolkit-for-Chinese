@@ -14,15 +14,12 @@ from pathlib import Path
 
 # function for loading preprocessed JSON documents
 def load_corpus(corpus_dir):
-
     corpus_dir = Path(corpus_dir)
     documents = []
 
     for file_path in sorted(corpus_dir.glob("*.json")):
-
         with file_path.open("r", encoding="utf-8") as file:
             document = json.load(file)
-
         documents.append(document)
 
     return documents
@@ -30,7 +27,6 @@ def load_corpus(corpus_dir):
 
 # function for extracting all filtered tokens
 def get_all_tokens(documents):
-
     all_tokens = []
 
     for document in documents:
@@ -41,13 +37,10 @@ def get_all_tokens(documents):
 
 # function for generating n-grams
 def generate_ngrams(tokens, n):
-
     ngrams = []
 
     for i in range(len(tokens) - n + 1):
-
         ngram = tuple(tokens[i:i + n])
-
         ngrams.append(ngram)
 
     return ngrams
@@ -55,24 +48,30 @@ def generate_ngrams(tokens, n):
 
 # function for calculating n-gram frequencies
 def calculate_ngram_frequency(tokens, n):
-
     ngrams = generate_ngrams(tokens, n)
-
     return Counter(ngrams)
+
+
+# function for getting n-gram name
+def get_ngram_name(n):
+    if n == 1:
+        return "unigram"
+    elif n == 2:
+        return "bigram"
+    elif n == 3:
+        return "trigram"
+    else:
+        return f"{n}gram"
 
 
 # function for printing n-gram results
 def print_ngram_results(frequencies, n, limit):
-
     if n == 1:
         title = "Unigram"
-
     elif n == 2:
         title = "Bigram"
-
     elif n == 3:
         title = "Trigram"
-
     else:
         title = f"{n}-gram"
 
@@ -81,7 +80,6 @@ def print_ngram_results(frequencies, n, limit):
     print("-" * 40)
 
     for ngram, frequency in frequencies.most_common(limit):
-
         print(
             " ".join(ngram),
             "freq=",
@@ -104,8 +102,20 @@ parser.add_argument(
     help="number of top n-grams to display and save (default: 20)"
 )
 
+parser.add_argument(
+    "--ngram",
+    type=int,
+    nargs="+",
+    default=None,
+    help="n-gram size(s) to analyse (default: 1 2 3)"
+)
+
 args = parser.parse_args()
+
 top_n = args.top
+
+# If --ngram is not specified, analyse unigram, bigram, and trigram
+ngram_sizes = args.ngram if args.ngram is not None else [1, 2, 3]
 
 
 # ============================================================
@@ -114,11 +124,14 @@ top_n = args.top
 
 # load preprocessed documents
 print("-" * 50)
+
 documents = load_corpus("data/preprocessed")
+
 print("Number of documents:", len(documents))
 
 # collect all filtered tokens
 all_tokens = get_all_tokens(documents)
+
 print("Total tokens:", len(all_tokens))
 
 
@@ -126,52 +139,21 @@ print("Total tokens:", len(all_tokens))
 # 2. n-gram analysis
 # ============================================================
 
-# ------------------------------------------------------------
-# 2.1 unigram analysis
-# ------------------------------------------------------------
+ngram_frequencies = {}
 
-unigram_frequencies = calculate_ngram_frequency(
-    all_tokens,
-    1
-)
+for n in ngram_sizes:
+    frequencies = calculate_ngram_frequency(
+        all_tokens,
+        n
+    )
 
-print_ngram_results(
-    unigram_frequencies,
-    1,
-    limit=top_n
-)
+    ngram_frequencies[n] = frequencies
 
-
-# ------------------------------------------------------------
-# 2.2 bigram analysis
-# ------------------------------------------------------------
-
-bigram_frequencies = calculate_ngram_frequency(
-    all_tokens,
-    2
-)
-
-print_ngram_results(
-    bigram_frequencies,
-    2,
-    limit=top_n
-)
-
-
-# ------------------------------------------------------------
-# 2.3 trigram analysis
-# ------------------------------------------------------------
-
-trigram_frequencies = calculate_ngram_frequency(
-    all_tokens,
-    3
-)
-
-print_ngram_results(
-    trigram_frequencies,
-    3,
-    limit=top_n
-)
+    print_ngram_results(
+        frequencies,
+        n,
+        limit=top_n
+    )
 
 
 # ============================================================
@@ -179,47 +161,26 @@ print_ngram_results(
 # ============================================================
 
 results_dir = Path("data/results")
-
 results_dir.mkdir(parents=True, exist_ok=True)
 
+ngram_results = {}
 
-ngram_results = {
+for n, frequencies in ngram_frequencies.items():
+    ngram_name = get_ngram_name(n)
 
-    "unigram": [
+    ngram_results[ngram_name] = [
         {
             "ngram": list(ngram),
             "frequency": frequency
         }
         for ngram, frequency
-        in unigram_frequencies.most_common(top_n)
-    ],
-
-    "bigram": [
-        {
-            "ngram": list(ngram),
-            "frequency": frequency
-        }
-        for ngram, frequency
-        in bigram_frequencies.most_common(top_n)
-    ],
-
-    "trigram": [
-        {
-            "ngram": list(ngram),
-            "frequency": frequency
-        }
-        for ngram, frequency
-        in trigram_frequencies.most_common(top_n)
+        in frequencies.most_common(top_n)
     ]
-
-}
 
 
 output_file = results_dir / "ngram_results.json"
 
-
 with output_file.open("w", encoding="utf-8") as file:
-
     json.dump(
         ngram_results,
         file,
@@ -230,7 +191,5 @@ with output_file.open("w", encoding="utf-8") as file:
 
 print("-" * 50)
 print("> N-gram analysis completed.")
-
 print("N-gram results saved to:", output_file)
-
 print("-" * 50)

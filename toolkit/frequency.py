@@ -7,7 +7,6 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 from matplotlib import rcParams  # for displaying Chinese characters in plots
 
-
 # configure font for Chinese characters in plots
 rcParams["font.sans-serif"] = ["Microsoft YaHei"]
 rcParams["axes.unicode_minus"] = False
@@ -297,10 +296,7 @@ print("Total tokens:", len(all_tokens))
 # create directory for analysis results
 results_dir = Path("data/results")
 
-results_dir.mkdir(
-    parents=True,
-    exist_ok=True
-)
+results_dir.mkdir(parents=True, exist_ok=True)
 
 
 # ------------------------------------------------------------
@@ -321,10 +317,7 @@ print("-" * 40)
 
 for word, frequency in word_freq.most_common(top_n):
 
-    print(
-        word,
-        frequency
-    )
+    print(word, frequency)
 
 
 # visualize word frequency
@@ -349,10 +342,7 @@ print("-" * 40)
 
 for character, frequency in char_freq.most_common(top_n):
 
-    print(
-        character,
-        frequency
-    )
+    print(character, frequency)
 
 
 # visualize character frequency
@@ -481,10 +471,7 @@ for result in collocations_by_ll[:top_n]:
 # save all collocation results
 output_file = results_dir / "collocations.json"
 
-with output_file.open(
-    "w",
-    encoding="utf-8"
-) as file:
+with output_file.open("w", encoding="utf-8") as file:
 
     json.dump(
         collocations,
@@ -496,10 +483,7 @@ with output_file.open(
 print("-" * 50)
 print("> Frequency analysis completed.")
 
-print(
-    "> Collocation results saved to:",
-    output_file
-)
+print("Collocation results saved to:", output_file)
 
 
 # save rankings by each statistical measure
@@ -511,14 +495,9 @@ ranked_results = {
 }
 
 
-ranked_output_file = (
-    results_dir / "collocations_ranked.json"
-)
+ranked_output_file = (results_dir / "collocations_ranked.json")
 
-with ranked_output_file.open(
-    "w",
-    encoding="utf-8"
-) as file:
+with ranked_output_file.open("w", encoding="utf-8") as file:
 
     json.dump(
         ranked_results,
@@ -528,9 +507,6 @@ with ranked_output_file.open(
     )
 
 
-print(
-    "> Ranked collocation results saved to:",
-    ranked_output_file
-)
+print("Ranked collocation results saved to:", ranked_output_file)
 
 print("-" * 50)

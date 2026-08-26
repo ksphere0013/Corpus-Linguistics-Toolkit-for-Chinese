@@ -103,7 +103,7 @@ def generate_kwic(concordance):
 # function for printing KWIC lines
 def print_kwic(kwic_results,keyword):
 
-    print(f"\nKWIC for: {keyword}")
+    print(f"KWIC results:")
 
     print("-" * 80)
 
@@ -131,6 +131,14 @@ parser.add_argument(
     help="generate concordance and KWIC analysis for a keyword"
 )
 
+parser.add_argument(
+    "--top",
+    type=int,
+    default=20,
+    metavar="N",
+    help="number of KWIC results to display in the terminal (default: 20)"
+)
+
 args = parser.parse_args()
 
 # ============================================================
@@ -138,6 +146,7 @@ args = parser.parse_args()
 # ============================================================
 
 # load the preprocessed corpus
+print("-" * 30)
 documents = load_preprocessed_corpus("data/preprocessed")
 print("Number of documents:", len(documents))
 
@@ -157,7 +166,10 @@ ttr = calculate_ttr(all_tokens)
 token_count = len(all_tokens)
 type_count = len(set(all_tokens))
 
-print("=" * 20, "Token-Type Ratio (TTR)", "=" * 20)
+print("-" * 30)
+print("> Token-Type Ratio (TTR)")
+print("-" * 30)
+
 print("Tokens:", token_count)   
 print("Types:",type_count)
 print(f"TTR: {ttr:.3f}") # show TTR rounded to three decimal places
@@ -166,7 +178,9 @@ print(f"TTR: {ttr:.3f}") # show TTR rounded to three decimal places
 # 2.2 concordance analysis
 # ------------------------------------------------------------
 
-print("=" * 20, "Concordance Analysis", "=" * 20)
+print("-" * 30)
+print("> Concordance Analysis")
+print("-" * 30)
 
 if not args.kwic:
     parser.error("\n! Use --kwic for concordance analysis.")
@@ -181,9 +195,8 @@ if args.kwic:
         window_size=5
     )
 
-    print("Concordance for:", keyword)
+    print("Keyword:", keyword)
     print("Number of occurrences:", len(concordance))
-
 
 # ------------------------------------------------------------
 # 2.3 KWIC analysis
@@ -192,7 +205,7 @@ if args.kwic:
     kwic_results = generate_kwic(concordance)
 
     # print first 20 KWIC results
-    print_kwic(kwic_results[:20], keyword)
+    print_kwic(kwic_results[:args.top], keyword)
 
 
 # ============================================================
@@ -222,7 +235,8 @@ if args.kwic:
             indent=2
         )
 
-    print("\nConcordance results saved to:", concordance_output_file)
+    print("> Corpus analysis completed.")
+    print("Concordance results saved to:", concordance_output_file)
 
 
 # ------------------------------------------------------------
@@ -246,3 +260,4 @@ if args.kwic:
         )
 
     print("KWIC results saved to:", kwic_output_file)
+    print("-" * 80)

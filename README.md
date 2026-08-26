@@ -46,8 +46,8 @@ Each article is stored as a separate UTF-8 JSON file in `data/raw/`, with the ar
   }
 }
 ```
-
-> *The `crawler.py` is provided in the toolkit for reference only and may require adaptation to different website layouts.*
+> **Note:**
+> The `crawler.py` is included in the toolkit for reference only and may require adaptation to different website layouts.
 
 ## **3. Corpus Description**
 
@@ -119,21 +119,24 @@ flowchart TD
 
 The preprocessing module reads the raw JSON corpus stored in `data/raw/`, generates token-only data for general corpus analysis, saved in `data/preprocessed/`, and POS-tagged data, saved in `data/pos_tagged/`. 
 
-> *POS tagging is included in the preprocessing module because the chosen tokenizer `jieba` (a lightweight and widely used tokenizer for Chinese language) conduct both tokenization and POS tagging through its `jieba.posseg` module at the same time.*
-
 The *preprocessed* and *pos_tagged* data can then be independently processed by the analysis modules. Analysis results, including frequency tables, collocations,
 search results, KWIC results, and N-gram statistics, are stored in `data/results/`.
+
+> **Note:**
+> POS tagging is included in the preprocessing module because the chosen tokenizer `jieba` (a lightweight and widely used tokenizer for Chinese language) conduct both tokenization and POS tagging through its `jieba.posseg` module at the same time.
 
 ## **5. Usage Instruction with Example Commands and Output**
 See `installation.md` for installation instrucion.
 
 ### **General**
 After installation, in your terminal, change directory to where your `data` folder is.
-Then, you can run each module in the toolkit from the same directory.
 For example, the path of my data folder is `A:\test\data\`, so I do:
 ```bash
 cd A:\test\
 ```
+
+Then, you can run each module in the toolkit from the same directory.
+
 To use each module, run:
 ```bash
 python -m toolkit.[module_name]
@@ -150,14 +153,17 @@ Some modules require at least one option to run. See examples below.
 
 ### **Preprocessing (POS tagging included)**
 
+By default, all documents in `data/raw/` will be preprocessed if you run this:
+
+```bash
+python -m toolkit.preprocessing
+```
+
+You can use options to filter your data. For example:
+
 ```bash
 python -m toolkit.preprocessing --license "CC BY-NC-SA 3.0" --genre "Online News Article" --topic 中国
 ```
-> **Notes**: 
-> 1. If no filtering options are used, all documents in `data/raw/` will be preprocessed by default.
-> 2. Here, filtering uses partial matching rather than exact matching.
-> 3. If your option parameters have white space, put them in quotation marks ("").
-> 4. The stopword list used in preprocessing module is stored in `data/stopwords.json`. You can change the list according to your purpose.
 
 <details>
 <summary> click here to show example output </summary>
@@ -193,40 +199,145 @@ POS-tagged documents saved to: data\pos_tagged
 
 </details> 
 
+> **Notes**: 
+> 1. Here, filtering uses partial matching rather than exact matching.
+> 2. If your option parameters have white space, put them in quotation marks ("").
+> 3. The stopword list used in this preprocessing module is stored in `data/stopwords.json`. You can change the list according to your purpose.
+
 ### **Frequency Analysis**
 
+By default, the top 20 results are displayed in the terminal for all frequency and collocation analyses.
+
+You can change the number of displayed results by adding `--top [NUMBER]` to your command. For example:
+
 ```bash
-python -m toolkit.frequency
+python -m toolkit.frequency --top 5
 ```
+The `--top` option only affects the number of results displayed in the terminal and does not affect the analysis results; the complete results are always saved in the corresponding JSON files regardless of this setting.
 
 <details>
 <summary> click here to show example output </summary>
 
 ```text
-
+--------------------------------------------------
+Number of documents: 159
+Total tokens: 248311
+Number of word types: 29995
+--------------------------------------------------
+1. frequency analysis
+--------------------------------------------------
+----------------------------------------
+> Top 5 most frequent words:
+----------------------------------------
+中国 2935
+我 1887
+我们 1253
+报告 1031
+你 1028
+----------------------------------------
+> Top 5 most frequent characters:
+----------------------------------------
+国 6526
+2 5326
+一 4792
+中 4657
+人 4330
+--------------------------------------------------
+2. collocation analysis
+--------------------------------------------------
+------------------------------
+> Top 5 collocations by MI:
+------------------------------
+Safeguard Defenders freq= 5 MI= 15.6
+叶 丰华 freq= 5 MI= 15.6
+谍龟 谍鱼 freq= 5 MI= 15.6
+Lingua Sinica freq= 5 MI= 15.6
+赛默 飞世尔 freq= 5 MI= 15.6
+----------------------------------------
+> Top 5 collocations by t-score:
+----------------------------------------
+中国 数字 freq= 375 t-score= 19.057
+数字 时代 freq= 336 t-score= 18.278
+我 觉得 freq= 307 t-score= 17.321
+报告 指出 freq= 140 t-score= 11.659
+户 晨风 freq= 136 t-score= 11.655
+----------------------------------------
+> Top 5 collocations by Dice:
+----------------------------------------
+菲尔 兹 freq= 12 Dice= 1.0
+瓦赫坦 戈夫 freq= 22 Dice= 1.0
+叶甫盖 尼 freq= 7 Dice= 1.0
+Safeguard Defenders freq= 5 Dice= 1.0
+Wi Fi freq= 7 Dice= 1.0
+----------------------------------------
+> Top 5 collocations by log-likelihood:
+----------------------------------------
+数字 时代 freq= 336 LL= 3935.071
+中国 数字 freq= 375 LL= 3106.74
+我 觉得 freq= 307 LL= 2745.177
+户 晨风 freq= 136 LL= 2006.317
+404 文库 freq= 133 LL= 1828.399
+--------------------------------------------------
+> Frequency analysis completed.
+> Collocation results saved to: data\results\collocations.json
+> Ranked collocation results saved to: data\results\collocations_ranked.json
+--------------------------------------------------
 ```
 
 </details> 
 
 ### **Corpus Analysis**
 
-By default, it shows only basic document info and TTR result.
-To include concordance analysis, use `--kwic`.
+By default, it shows only the TTR result. To perform concordance and KWIC analysis, use `--kwic` followed by a keyword. 
+
+If you use `--kwic`, the terminal displays the top 20 KWIC results by default. You can change the number of displayed results using `--top`. 
+
+Example:
 
 ```bash
-python -m toolkit.corpus_analysis --kwic 女性
+python -m toolkit.corpus_analysis --kwic 女性 --top 5
 ```
+The --top option only affects the number of results displayed in the terminal; complete concordance and KWIC results are saved to the corresponding JSON files regardless of this setting.
 
 <details>
 <summary> click here to show example output </summary>
 
 ```text
-
+------------------------------
+Number of documents: 159
+------------------------------
+> Token-Type Ratio (TTR)
+------------------------------
+Tokens: 248311
+Types: 29995
+TTR: 0.121
+------------------------------
+> Concordance Analysis
+------------------------------
+Keyword: 女性
+Number of occurrences: 220
+KWIC results:
+--------------------------------------------------------------------------------
+发生 父系社会 反而 全部 发生              女性          解放 时代 载人 航天 互联网
+互联网 人工智能 重大 科技进步 发生           女性          地位 不断 提高 原有 性别
+社交 软件 群组 针对 德华                女性          实施 系统性 迷奸 偷拍 传播
+参与 宣传 一位 年轻 维吾尔族              女性          指示 回去 你 美好 经历
+由此 成为 该奖 历史 第三位               女性          得主 二人 曾 北京大学 2007
+--------------------------------------------------------------------------------
+> Corpus analysis completed.
+Concordance results saved to: data\results\concordance_results.json
+KWIC results saved to: data\results\kwic_results.json
+--------------------------------------------------------------------------------
 ```
 
 </details> 
 
 ### **N-gram Analysis**
+
+By default, the top 20 results are displayed in the terminal for unigram, bigram, and trigram analyses.
+
+You can change the number of displayed results by adding `--top [NUMBER]` to your command. For example:
+
 ```bash
 python -m toolkit.ngram
 ```
