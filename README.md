@@ -69,7 +69,7 @@ Each document is stored as an individual JSON file. The corpus contains both art
 ```
 ### **Disclaimer**
 
-This corpus was collected and processed for this project and is not an official dataset published by China Digital Times. The corpus is provided for research and educational purposes. Users are responsible for complying with the terms of the original [CC BY-NC-SA 3.0 license](https://creativecommons.org/licenses/by-nc-sa/3.0/) and any other applicable terms when using or redistributing the corpus.
+This corpus was collected and processed for this project and is not an official dataset published by [China Digital Times](https://chinadigitaltimes.net/chinese/). The corpus is provided for research and educational purposes. Users are responsible for complying with the terms of the original [CC BY-NC-SA 3.0 license](https://creativecommons.org/licenses/by-nc-sa/3.0/) and any other applicable terms when using or redistributing the corpus.
 
 ## **4. System Architecture**
 
@@ -214,9 +214,9 @@ Total tokens after stopword removal: 17045
 </details>
 
 > **Notes:**
-> * Metadata filtering uses **partial matching** rather than exact matching.
-> * If an option parameter contains **whitespace**, enclose the parameter in quotation marks `""`.
-> * The **stopword** list used by this module is stored in `data/stopwords.json`. The list can be modified according to the research purpose.
+> - Metadata filtering uses **partial matching** rather than exact matching.
+> - If an option parameter contains **whitespace**, enclose the parameter in quotation marks `""`.
+> - The **stopword** list used by this module is stored in `data/stopwords.json`. The list can be modified according to the research purpose.
 
 ---
 
@@ -457,9 +457,8 @@ Number of results: 8832
 
 > **Notes:**
 >
-> * POS tags and their meanings are listed in `data/pos_tagset.txt`.
-> * `--raw` can be used together with `--keyword` and/or `--regex` to search the original, unprocessed text in `data/raw/`.
-> * `--pos` cannot be used with `--raw`, as POS tags are only available for the preprocessed corpus.
+> - **POS tags** and their meanings are listed in `data/pos_tagset.txt`.
+> - Optionally, `--raw` can be used together with `--keyword` and/or `--regex` to search the original, unprocessed text in `data/raw/`. `--pos` cannot be used with `--raw`, as POS tags are only available for the preprocessed corpus.
 
 ## **6. Challenges Faced**
 
