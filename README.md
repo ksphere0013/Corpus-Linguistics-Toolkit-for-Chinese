@@ -1,5 +1,5 @@
 # **Corpus Linguistics Toolkit for Chinese**
-*A Python-based toolkit for collecting, preprocessing, searching, and analyzing Chinese-language corpora.*
+A Python-based toolkit for collecting, preprocessing, searching, and analyzing Chinese-language corpora.
 
 ## **Table of Contents**
 
@@ -14,7 +14,6 @@
    - [5.4 N-gram Analysis](#54-n-gram-analysis)
    - [5.5 Corpus Search](#55-corpus-search)
 6. [Challenges Faced](#6-challenges-faced)
-7. [Final Note](#7-final-note)
 
 ## **1. Project Overview**
 
