@@ -180,5 +180,5 @@ with output_file.open("w", encoding="utf-8") as file:
 
 print("-" * 50)
 print("> N-gram analysis completed.")
-print("N-gram results saved to:", output_file)
+print("> N-gram results saved to:", output_file)
 print("-" * 50)

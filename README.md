@@ -202,13 +202,13 @@ Building prefix dict from the default dictionary ...
 Loading model from cache C:\Users\ma188\AppData\Local\Temp\jieba.cache
 Loading model cost 0.603 seconds.
 Prefix dict has been built successfully.
-> Tokenization compeleted.
+> Tokenization completed.
 Total tokens: 23342
 Total tokens after stopword removal: 17045
 --------------------------------------------------
 > Preprocessing completed.
-Token-only documents saved to: data\preprocessed
-POS-tagged documents saved to: data\pos_tagged
+> Token-only documents saved to: data\preprocessed
+> POS-tagged documents saved to: data\pos_tagged
 --------------------------------------------------
 ```
 
@@ -216,7 +216,7 @@ POS-tagged documents saved to: data\pos_tagged
 
 > **Notes:**
 > * Metadata filtering uses **partial matching** rather than exact matching.
-> * If an option parameter contains **whitespace**, enclose the parameter in quotation marks (`""`).
+> * If an option parameter contains **whitespace**, enclose the parameter in quotation marks `""`.
 > * The **stopword** list used by this module is stored in `data/stopwords.json`. The list can be modified according to the research purpose.
 
 ---
@@ -300,8 +300,8 @@ Wi Fi freq= 7 Dice= 1.0
 404 文库 freq= 133 LL= 1828.399
 --------------------------------------------------
 > Frequency analysis completed.
-Collocation results saved to: data\results\collocations.json
-Ranked collocation results saved to: data\results\collocations_ranked.json
+> Collocation results saved to: data\results\collocations.json
+> Ranked collocation results saved to: data\results\collocations_ranked.json
 --------------------------------------------------
 ```
 
@@ -347,8 +347,8 @@ KWIC results:
 由此 成为 该奖 历史 第三位               女性          得主 二人 曾 北京大学 2007
 --------------------------------------------------------------------------------
 > Corpus analysis completed.
-Concordance results saved to: data\results\concordance_results.json
-KWIC results saved to: data\results\kwic_results.json
+> Concordance results saved to: data\results\concordance_results.json
+> KWIC results saved to: data\results\kwic_results.json
 --------------------------------------------------------------------------------
 ```
 
@@ -393,7 +393,7 @@ CDT 报告 汇 栏目 freq= 53
 汇 栏目 收录 中国 freq= 49
 --------------------------------------------------
 > N-gram analysis completed.
-N-gram results saved to: data\results\ngram_results.json
+> N-gram results saved to: data\results\ngram_results.json
 --------------------------------------------------
 ```
 

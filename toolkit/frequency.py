@@ -436,5 +436,5 @@ with ranked_output_file.open("w", encoding="utf-8") as file:
         indent=2
     )
 
-print("Ranked collocation results saved to:", ranked_output_file)
+print("> Ranked collocation results saved to:", ranked_output_file)
 print("-" * 50)

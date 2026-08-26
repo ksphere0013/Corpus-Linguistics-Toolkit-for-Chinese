@@ -316,7 +316,7 @@ total_filtered_tokens = sum(
     for document in preprocessed_documents
 )
 
-print("> Tokenization compeleted.")
+print("> Tokenization completed.")
 print("Total tokens:", total_tokens)
 print("Total tokens after stopword removal:", total_filtered_tokens)
 
@@ -362,6 +362,6 @@ for document in pos_tagged_documents:
 
 print("-" * 50)
 print("> Preprocessing completed.")
-print("Token-only documents saved to:", preprocessed_dir)
-print("POS-tagged documents saved to:", pos_tagged_dir)
+print("> Token-only documents saved to:", preprocessed_dir)
+print("> POS-tagged documents saved to:", pos_tagged_dir)
 print("-" * 50)

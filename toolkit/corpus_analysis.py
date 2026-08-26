@@ -180,7 +180,7 @@ if args.kwic:
             indent=2
         )
     print("> Corpus analysis completed.")
-    print("Concordance results saved to:", concordance_output_file)
+    print("> Concordance results saved to:", concordance_output_file)
 
 # ------------------------------------------------------------
 # 3.2 save KWIC results
@@ -199,5 +199,5 @@ if args.kwic:
             ensure_ascii=False,
             indent=2
         )
-    print("KWIC results saved to:", kwic_output_file)
+    print("> KWIC results saved to:", kwic_output_file)
     print("-" * 80)
