@@ -1,5 +1,5 @@
 # **Corpus Linguistics Toolkit for Chinese**
-> A Python-based toolkit for collecting, preprocessing, searching, and analyzing Chinese-language corpora.
+*A Python-based toolkit for collecting, preprocessing, searching, and analyzing Chinese-language corpora.*
 
 ## **Table of Contents**
 
@@ -494,6 +494,6 @@ Several challenges were encountered during data collection, preprocessing, and c
 
 ---
 
-> **Final Note:**  
-> <sub>This is the end of this lengthy README. I doubt anyone would actually read this far, but anyway...</sub>  
-> kudos to the CDT team for keeping an interesting corner of the Simplified Chinese internet alive <3
+***Final Note:***  
+*<sub>This is the end of this lengthy README. I doubt anyone would actually read this far, but anyway...</sub>*  
+*kudos to the CDT team for keeping an interesting corner of the Simplified Chinese internet alive <3*
