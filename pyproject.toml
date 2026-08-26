@@ -8,6 +8,26 @@ version = "0.1.0"
 description = "A Python toolkit for analysing Chinese corpora"
 readme = "README.md"
 requires-python = ">=3.10"
+
+authors = [
+    {name = "ksphere0013", email = "ksphere0013@gmail.com"}
+]
+
+license = {text = "MIT"}
+
+keywords = [
+    "corpus linguistics",
+    "Chinese corpus",
+    "NLP",
+    "Python"
+]
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+
 dependencies = [
     "requests",
     "beautifulsoup4",
@@ -16,6 +36,10 @@ dependencies = [
     "matplotlib",
     "jieba"
 ]
+
+[project.urls]
+Homepage = "https://github.com/ksphere0013/Corpus-Linguistics-Toolkit-for-Chinese"
+Issues = "https://github.com/ksphere0013/Corpus-Linguistics-Toolkit-for-Chinese/issues"
 
 [tool.setuptools.packages.find]
 include = ["toolkit*"]
