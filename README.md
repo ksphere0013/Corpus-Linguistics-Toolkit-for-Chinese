@@ -12,14 +12,17 @@ For each article, the crawler extracts the `title`, `author`, `source`, `publica
 
 `OpenCC` is used to convert Traditional Chinese characters, if any, to Simplified Chinese characters. 
 
-Each article is stored as a separate UTF-8 JSON file with metadata in data/raw/.
+Each article is stored as a separate UTF-8 JSON file with metadata in `data/raw/`.
 
 > *The `crawler.py` is provided in the toolkit for reference only and may require adaptation to different website layouts.*
 
 ## 3. Corpus Description
 The sample corpus consists of 159 online news articles written in Mandarin Chinese, with 340,277 tokens before stopword removal and 248,311 tokens after stopword removal.
 
-The original content is licensed by China Digital Times under the [Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License](https://creativecommons.org/licenses/by-nc-sa/3.0/) (CC BY-NC-SA 3.0). The copyright and licensing information of the articles is preserved in the metadata.
+The original content is licensed by China Digital Times under the [Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License](https://creativecommons.org/licenses/by-nc-sa/3.0/) (CC BY-NC-SA 3.0). The copyright and licensing information of the articles is preserved in the metadata. 
+
+The corpus data is provided for research and educational purposes.
+Users should comply with the terms of the original CC BY-NC-SA 3.0 license.
 
 ## 4. System Architecture
 
@@ -31,8 +34,7 @@ The overall workflow is:
 
 ```mermaid
 flowchart TD
-    A[Source Website] --> B[crawler.py]
-    B --> C[data/raw/]
+    C[data/raw/]
 
     C --> D[preprocessing.py]
 
@@ -51,13 +53,11 @@ flowchart TD
     I --> K
     J --> K
 
-    classDef python fill:#e8f0fe,stroke:#4285f4,stroke-width:1.5px,color:#1a1a1a;
-    classDef data fill:#f3f3f3,stroke:#888,stroke-width:1px,color:#333;
-    classDef source fill:#fff3cd,stroke:#d6a700,stroke-width:1px,color:#333;
+    classDef python fill:#E8EEF2,stroke:#526777,stroke-width:2px,color:#263640;
+    classDef data fill:#F5F1E8,stroke:#9A8C70,stroke-width:2px,color:#4A4338;
 
-    class B,D,G,H,I,J python;
+    class D,G,H,I,J python;
     class C,E,F,K data;
-    class A source;
 ```
 
 ### Main Components
@@ -138,28 +138,3 @@ python -m Toolkit.ngram
 
 ## 6. Challenges Faced
 text
-
-## 7. License
-
-### Source Code
-
-The source code of this project is released under the MIT License.
-See the `LICENSE` file for details.
-
-### Corpus Data
-
-The corpus data collected from China Digital Times (CDT) is subject to
-the original license of the source website.
-
-China Digital Times states that its original content is licensed under the
-Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
-(CC BY-NC-SA 3.0).
-
-Source:
-https://chinadigitaltimes.net/chinese/
-
-License:
-https://creativecommons.org/licenses/by-nc-sa/3.0/
-
-The corpus data is provided for research and educational purposes.
-Users should comply with the terms of the original CC BY-NC-SA 3.0 license.
