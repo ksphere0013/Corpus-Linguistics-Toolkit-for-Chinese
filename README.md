@@ -117,7 +117,7 @@ flowchart TD
 
 ### **Data Flow**
 
-The `preprocessing` module reads the raw JSON corpus stored in `data/raw/`, generates token-only data for general corpus analysis, saved in `data/preprocessed/`, and POS-tagged data, saved in `data/pos_tagged/`. 
+The preprocessing module reads the raw JSON corpus stored in `data/raw/`, generates token-only data for general corpus analysis, saved in `data/preprocessed/`, and POS-tagged data, saved in `data/pos_tagged/`. 
 
 > *POS tagging is included in the preprocessing module because the chosen tokenizer `jieba` (a lightweight and widely used tokenizer for Chinese language) conduct both tokenization and POS tagging through its `jieba.posseg` module at the same time.*
 
@@ -129,12 +129,11 @@ See `installation.md` for installation instrucion.
 
 ### **General**
 After installation, in your terminal, change directory to where your `data` folder is.
+Then, you can run each module in the toolkit from the same directory.
 For example, the path of my data folder is `A:\test\data\`, so I do:
 ```bash
 cd A:\test\
 ```
-Then, you can run each module in the toolkit from the same directory.
----
 To use each module, run:
 ```bash
 python -m toolkit.[module_name]
@@ -147,18 +146,52 @@ For each module, use `-h` or `--help` to see instructions for different options.
 ```bash
 python -m toolkit.preprocessing [-h]
 ```
-
 Some modules require at least one option to run. See examples below.
----
 
 ### **Preprocessing (POS tagging included)**
-optionally with document filtering based on metadata parameter(s):
 
 ```bash
-python -m toolkit.preprocessing --license "CC BY-NC-SA 3.0" --genre "Online News Article"
+python -m toolkit.preprocessing --license "CC BY-NC-SA 3.0" --genre "Online News Article" --topic 中国
+```
+> **Notes**: 
+> 1. If no filtering options are used, all documents in `data/raw/` will be preprocessed by default.
+> 2. Here, filtering uses partial matching rather than exact matching.
+> 3. If your option parameters have white space, put them in quotation marks ("").
+> 4. The stopword list used in preprocessing module is stored in `data/stopwords.json`. You can change the list according to your purpose.
+
+<details>
+<summary> click here to show example output </summary>
+
+```text
+--------------------------------------------------
+> Number of documents: 159
+--------------------------------------------------
+> Filtering criteria:
+| Topic: 中国
+| Genre: Online News Article
+| License: CC BY-NC-SA 3.0
+--------------------------------------------------
+> Number of documents after filtering: 12
+--------------------------------------------------
+> 89 stopwords loaded.
+Stopwords: {'让', '一种', '还', '会', '从', '地', '最', '已经', '它', '其实', '像', '年', '多', '什么', '称', '但', '把', '于', '被', '到', '对', '那', '人', '这些', '没有', '要', '或者', '这', '很多', '却', '能', '不', '一些', '下', '之', '以', '中', '上', '和', '等', '而', '一', '其', '这种', '可能', '了', '这个', '日', '后', '或', '做', '已', '向', '甚至', '时', '去', '一个', '就是', '与', '的', '说', '也', '包括', '着', '很', '个', '都', '又', '这样', '但是', '是', '更', '可以', '并', '在', '因为', '通过', '不是', '有', '来', '该', '还是', '以及', '为', '月', '将', '就', '里', '给'}
+--------------------------------------------------
+> Tokenizing...
+Building prefix dict from the default dictionary ...
+Loading model from cache C:\Users\ma188\AppData\Local\Temp\jieba.cache
+Loading model cost 0.726 seconds.
+Prefix dict has been built successfully.
+> Tokenization compeleted.
+Total tokens: 23342
+Total tokens after stopword removal: 17045
+--------------------------------------------------
+> Preprocessing completed.
+Token-only documents saved to: data\preprocessed
+POS-tagged documents saved to: data\pos_tagged
+--------------------------------------------------
 ```
 
-> *Note: If your parameter has white space, put it in quotation marks ("").*
+</details> 
 
 ### **Frequency Analysis**
 
@@ -166,22 +199,16 @@ python -m toolkit.preprocessing --license "CC BY-NC-SA 3.0" --genre "Online News
 python -m toolkit.frequency
 ```
 
-### **Corpus Analysis**
-
-```bash
-python -m toolkit.corpus_analysis
-```
-
 <details>
-<summary> Show example output: </summary>
+<summary> click here to show example output </summary>
 
 ```text
-Token count: 340277
-Type count: 23681
-TTR: 0.13
+
 ```
 
 </details> 
+
+### **Corpus Analysis**
 
 By default, it shows only basic document info and TTR result.
 To include concordance analysis, use `--kwic`.
@@ -190,14 +217,44 @@ To include concordance analysis, use `--kwic`.
 python -m toolkit.corpus_analysis --kwic 女性
 ```
 
-### **Corpus Search**
-```bash
-python -m toolkit.corpus_search
+<details>
+<summary> click here to show example output </summary>
+
+```text
+
 ```
+
+</details> 
+
 ### **N-gram Analysis**
 ```bash
 python -m toolkit.ngram
 ```
 
+<details>
+<summary> click here to show example output </summary>
+
+```text
+
+```
+
+</details> 
+
+### **Corpus Search**
+```bash
+python -m toolkit.corpus_search
+```
+
+<details>
+<summary> click here to show example output </summary>
+
+```text
+
+```
+
+</details> 
+
+
+
 ## **6. Challenges Faced**
-text
+- 一开始用request访问post archive，得到403 error，于是改用selenium

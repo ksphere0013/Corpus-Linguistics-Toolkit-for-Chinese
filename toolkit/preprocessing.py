@@ -59,11 +59,11 @@ def filter_documents(
                 continue
 
         if genre is not None:
-            if metadata.get("genre") != genre:
+            if genre not in metadata.get("genre"):
                 continue
 
         if license is not None:
-            if metadata.get("license") != license:
+            if license not in metadata.get("license"):
                 continue
 
         filtered.append(document)
