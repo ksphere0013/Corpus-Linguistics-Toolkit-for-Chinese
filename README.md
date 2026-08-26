@@ -3,31 +3,36 @@
 ## **1. Project Overview**
 This project is a corpus linguistics toolkit written in Python for the analysis of Chinese corpora. It offers tools for corpus corpus preprocessing, corpus search, frequency analysis, collocation analysis, concordance/KWIC analysis and n-gram analysis.
 
-## **2. Data Collection Approach**
+## **2. Data Collection**
 
 The corpus was collected from the [China Digital Times (CDT)](https://chinadigitaltimes.net/chinese/) archive.
 
-The crawler uses `Selenium` to access the CDT archive pages and collect article URLs, and `BeautifulSoup` to parse individual article pages. In the current implementation, URLs are collected from the first five archive pages. Articles without author information are excluded.
+The crawler uses `Selenium` to access the [CDT archive pages](https://chinadigitaltimes.net/chinese/post-archives) and collect article URLs, and `BeautifulSoup` to parse individual article pages. In the current implementation, URLs are collected from the first five archive pages. Articles without author information are excluded.
 
-For each article, the crawler extracts the following metadata:
-
-- `title`
-- `source`
-- `url`
-- `author`
-- `published`
-- `genre`
-- `topic`
-- `copyright`
-- `license`
+For each article, the crawler extracts the following metadata: `title`, `source`, `url`, `author`, `published`, `genre`, `topic`, `copyright`, `license`.
 
 The publication date is normalised to the `YYYY-MM-DD` format. The genre is recorded as `Online News Article`. When no topic can be extracted, the topic is recorded as `Unknown`.
 
-The main article content is extracted from the `<article>` element, using its `h2`, `h3`, and `p` elements. Page-level metadata such as “所在分类(Category)” and “标签(Tag)”, as well as the “相关阅读” (Related Readings) section, are excluded from the corpus text.
+The main article content is extracted from the `<article>` element, using its `h2`, `h3`, and `p` elements. Page-level metadata such as “所在分类” (Category) and “标签” (Tag), as well as the “相关阅读” (Related Readings) section, are excluded from the corpus text.
 
 `OpenCC` is used to convert Traditional Chinese characters, if any, to Simplified Chinese characters.
 
-Each article is stored as a separate UTF-8 JSON file in `data/raw/`, with the article text and metadata stored separately. For example:
+Each article is stored as a separate UTF-8 JSON file in `data/raw/`. 
+
+> **Note:**
+> The `crawler.py` is included in the toolkit for reference only and may require adaptation to different website layouts.
+
+## **3. Corpus Description**
+
+The sample corpus consists of 159 Chinese-language original articles collected published by China Digital Times between September 29, 2025 and August 17, 2026.
+
+The corpus contains:
+
+- **Documents:** 159
+- **Tokens before stopword removal:** 340,277
+- **Tokens after stopword removal:** 248,311
+
+Each document is stored as an individual JSON file. The corpus contains both article text and structured metadata. For example:
 
 ```json
 {
@@ -46,20 +51,6 @@ Each article is stored as a separate UTF-8 JSON file in `data/raw/`, with the ar
   }
 }
 ```
-> **Note:**
-> The `crawler.py` is included in the toolkit for reference only and may require adaptation to different website layouts.
-
-## **3. Corpus Description**
-
-The sample corpus consists of 159 Chinese-language online news articles collected from China Digital Times (CDT).
-
-The corpus contains:
-
-- **Documents:** 159
-- **Tokens before stopword removal:** 340,277
-- **Tokens after stopword removal:** 248,311
-
-Each document is stored as an individual JSON file. The corpus contains both article text and structured metadata, including title, source, URL, author, publication date, genre, topic, copyright holder, and license.
 
 The original content is licensed by China Digital Times under the [Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License (CC BY-NC-SA 3.0)](https://creativecommons.org/licenses/by-nc-sa/3.0/). The original copyright and licensing information is preserved in the metadata of each document.
 
@@ -88,6 +79,7 @@ flowchart TD
     E --> J[corpus_search.py]
 
     F --> J
+    C --> J
 
     G --> K[data/results/]
     H --> K
@@ -104,22 +96,21 @@ flowchart TD
 ### **Main Components**
 
 - **`preprocessing.py`** – performs sentence segmentation, tokenisation,
-  punctuation removal, stopword removal, and POS tagging. It generates
-  both token-only and POS-tagged versions of the corpus.
+  punctuation removal, stopword removal, and POS tagging. 
 - **`frequency.py`** – performs word and character frequency analysis and
   collocation analysis using statistical association measures.
 - **`corpus_analysis.py`** – provides basic corpus information, TTR,
   concordance generation, and KWIC analysis.
+- **`ngram.py`** – performs unigram, bigram, and trigram analysis.
 - **`corpus_search.py`** – supports keyword, regular expression, and
   pos-based searches.
-- **`ngram.py`** – performs unigram, bigram, and trigram analysis.
 
 
 ### **Data Flow**
 
 The preprocessing module reads the raw JSON corpus stored in `data/raw/`, generates token-only data for general corpus analysis, saved in `data/preprocessed/`, and POS-tagged data, saved in `data/pos_tagged/`. 
 
-The *preprocessed* and *pos_tagged* data can then be independently processed by the analysis modules. Analysis results, including frequency tables, collocations,
+The preprocessed and POS-tagged data can then be independently processed by the analysis modules. Analysis results, including frequency tables, collocations,
 search results, KWIC results, and N-gram statistics, are stored in `data/results/`.
 
 > **Note:**
@@ -139,23 +130,25 @@ Then, you can run each module in the toolkit from the same directory.
 
 To use each module, run:
 ```bash
-python -m toolkit.[module_name]
+python -m toolkit.[MODULE_NAME]
 ```
-For example, 
+For example:
+
 ```bash
 python -m toolkit.preprocessing
 ```
+
 For each module, use `-h` or `--help` to see instructions for different options. 
+
 ```bash
 python -m toolkit.preprocessing -h
 ```
-> **Note:** Some modules require at least one option to run. See examples below.
 
 ---
 
 ### **Preprocessing (POS tagging included)**
 
-The preprocessing module segments text into sentences, tokenizes and POS-tags the text using Jieba, removes punctuation and stopwords, and saves both token-only and POS-tagged versions of the preprocessed corpus.
+The **`preprocessing`** module segments text into sentences, tokenizes and POS-tags the text using `jieba`, removes punctuation and stopwords, and saves both token-only and POS-tagged versions of the preprocessed corpus.
 
 By default, all documents in `data/raw/` will be preprocessed if you run this:
 
@@ -207,15 +200,15 @@ POS-tagged documents saved to: data\pos_tagged
 </details> 
 
 > **Notes**: 
-> 1. Here, filtering uses **partial matching** rather than exact matching.
-> 2. If your option parameter(s) has any **white space**, put the parameter(s) in quotation marks ("").
-> 3. The **stopword** list used in this preprocessing module is stored in `data/stopwords.json`. You can change the list according to your purpose.
+> - Here, filtering uses **partial matching** rather than exact matching.
+> - If your option parameter(s) has any **white space**, put the parameter(s) in quotation marks ("").
+> - The **stopword** list used in this preprocessing module is stored in `data/stopwords.json`. You can change the list according to your purpose of study.
 
 ---
 
 ### **Frequency Analysis**
 
-The frequency module calculates word and character frequencies and performs collocation analysis using Mutual Information (MI), t-score, Dice coefficient, and log-likelihood. Results will be saved in `data/results/`.
+The **`frequency`** module calculates word and character frequencies and performs collocation analysis using Mutual Information (MI), t-score, Dice coefficient, and log-likelihood. 
 
 By default, the top 20 results are displayed in the terminal for all frequency and collocation analyses. You can change the number of displayed results by adding `--show` to your command. 
 
@@ -302,7 +295,7 @@ Wi Fi freq= 7 Dice= 1.0
 ---
 
 ### **Corpus Analysis**
-The `corpus_analysis` module allows you to conduct TTR and concordance analyses to examine lexical diversity and keyword usage in context. Results will be saved in `data/results/`.
+The **`corpus_analysis`** module allows you to conduct TTR and concordance analyses to examine lexical diversity and keyword usage in context. 
 
 By default, it shows only the TTR result. To perform concordance analysis and show KWIC result, use `--kwic` followed by a keyword. In that case, the terminal displays the top 20 KWIC results by default. You can change the number of displayed results using `--show`. 
 
@@ -348,9 +341,9 @@ KWIC results saved to: data\results\kwic_results.json
 ---
 
 ### **N-gram Analysis**
-The `ngram` module allows you to do N-gram analyses of different sizes. Results will be saved in `data/results/`.
+The **`ngram`** module allows you to do N-gram analyses of different sizes. 
 
-By default, it conducts unigram, bigram, and trigram analyses and show top 20 results for each. You can use --ngram [NUMBER] to specify the n-gram size(s) to analyse. Multiple n-gram sizes can be specified in a single command. You can also change the number of displayed results using `--show`.
+By default, it conducts unigram, bigram, and trigram analyses, and show top 20 results for each. You can use `--ngram` to specify the n-gram size(s) to analyse. Multiple n-gram sizes can be specified in a single command. You can also change the number of displayed results using `--show`.
 
 Example:
 
@@ -393,7 +386,7 @@ N-gram results saved to: data\results\ngram_results.json
 
 ### **Corpus Search**
 
-The `corpus_search` module allows you to search the corpus using keywords, regular expressions, and part-of-speech (POS) tags. Results will be saved in `data/results/`.
+The **`corpus_search`** module allows you to search the corpus using keywords, regular expressions, and part-of-speech (POS) tags.
 
 These three search methods are independent and can be used separately or together. Also, you can change the number of displayed results using `--show`(default: 20).
 
@@ -446,8 +439,8 @@ Number of results: 8832
 </details> 
 
 > **Notes:**
-> 1. POS tags and their meanings are listed in `data/pos_tagset.txt.`
-> 2. Optionally, use the `--raw` together with `--keyword` and/or `--regex` to search the original, unprocessed text form `data/raw/`. `--pos` cannot be used with `--raw`, as POS tags are only available for the preprocessed corpus.
+> - POS tags and their meanings are listed in `data/pos_tagset.txt`.
+> - Optionally, use the `--raw` together with `--keyword` and/or `--regex` to search the original, unprocessed text form `data/raw/`. `--pos` cannot be used with `--raw`, as POS tags are only available for the preprocessed corpus.
 
 
 ## **6. Challenges Faced**
