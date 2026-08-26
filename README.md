@@ -43,17 +43,11 @@ Each article is stored as a separate UTF-8 JSON file in `data/raw/`.
 
 The sample corpus consists of 159 original Chinese-language articles published by China Digital Times between September 29, 2025 and August 17, 2026.
 
-The corpus contains:
-
-* **Documents:** 159
-* **Tokens before stopword removal:** 340,277
-* **Tokens after stopword removal:** 248,311
-
-| Measure | Value |
-|---|---:|
-| Documents | 159 |
-| Tokens before stopword removal | 340,277 |
-| Tokens after stopword removal | 248,311 |
+> **Corpus Size**
+>
+> **159** documents  
+> **340,277** tokens before stopword removal  
+> **248,311** tokens after stopword removal
 
 Each document is stored as an individual JSON file. The corpus contains both article text and structured metadata. For example:
 
