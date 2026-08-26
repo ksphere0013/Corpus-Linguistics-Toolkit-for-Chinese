@@ -147,11 +147,15 @@ python -m toolkit.preprocessing
 ```
 For each module, use `-h` or `--help` to see instructions for different options. 
 ```bash
-python -m toolkit.preprocessing [-h]
+python -m toolkit.preprocessing -h
 ```
-Some modules require at least one option to run. See examples below.
+> **Note:** Some modules require at least one option to run. See examples below.
+
+---
 
 ### **Preprocessing (POS tagging included)**
+
+The preprocessing module segments text into sentences, tokenizes and POS-tags the text using Jieba, removes punctuation and stopwords, and saves both token-only and POS-tagged versions of the preprocessed corpus.
 
 By default, all documents in `data/raw/` will be preprocessed if you run this:
 
@@ -159,7 +163,10 @@ By default, all documents in `data/raw/` will be preprocessed if you run this:
 python -m toolkit.preprocessing
 ```
 
-You can use options to filter your data. For example:
+You can filter the corpus by metadata using any combination of the following options:
+`--source`, `--author`, `--topic`, `--genre`, `--license`.
+
+For example:
 
 ```bash
 python -m toolkit.preprocessing --license "CC BY-NC-SA 3.0" --genre "Online News Article" --topic 中国
@@ -200,20 +207,26 @@ POS-tagged documents saved to: data\pos_tagged
 </details> 
 
 > **Notes**: 
-> 1. Here, filtering uses partial matching rather than exact matching.
-> 2. If your option parameters have white space, put them in quotation marks ("").
-> 3. The stopword list used in this preprocessing module is stored in `data/stopwords.json`. You can change the list according to your purpose.
+> 1. Here, filtering uses **partial matching** rather than exact matching.
+> 2. If your option parameter(s) has any **white space**, put the parameter(s) in quotation marks ("").
+> 3. The **stopword** list used in this preprocessing module is stored in `data/stopwords.json`. You can change the list according to your purpose.
+
+---
 
 ### **Frequency Analysis**
 
-By default, the top 20 results are displayed in the terminal for all frequency and collocation analyses.
+The frequency module calculates word and character frequencies and performs collocation analysis using Mutual Information (MI), t-score, Dice coefficient, and log-likelihood. Results will be saved in `data/results/`.
 
-You can change the number of displayed results by adding `--top [NUMBER]` to your command. For example:
+By default, the top 20 results are displayed in the terminal for all frequency and collocation analyses. You can change the number of displayed results by adding `--show` to your command. 
+
+> **Note:**
+> The `--show` option only affects the number of results displayed in the terminal and does not affect the analysis results; the complete results are always saved in the corresponding JSON files regardless of this setting.
+
+Example command:
 
 ```bash
-python -m toolkit.frequency --top 5
+python -m toolkit.frequency --show 5
 ```
-The `--top` option only affects the number of results displayed in the terminal and does not affect the analysis results; the complete results are always saved in the corresponding JSON files regardless of this setting.
 
 <details>
 <summary> click here to show example output </summary>
@@ -286,18 +299,18 @@ Wi Fi freq= 7 Dice= 1.0
 
 </details> 
 
+---
+
 ### **Corpus Analysis**
+The `corpus_analysis` module allows you to conduct TTR and concordance analyses to examine lexical diversity and keyword usage in context. Results will be saved in `data/results/`.
 
-By default, it shows only the TTR result. To perform concordance and KWIC analysis, use `--kwic` followed by a keyword. 
-
-If you use `--kwic`, the terminal displays the top 20 KWIC results by default. You can change the number of displayed results using `--top`. 
+By default, it shows only the TTR result. To perform concordance analysis and show KWIC result, use `--kwic` followed by a keyword. In that case, the terminal displays the top 20 KWIC results by default. You can change the number of displayed results using `--show`. 
 
 Example:
 
 ```bash
-python -m toolkit.corpus_analysis --kwic 女性 --top 5
+python -m toolkit.corpus_analysis --kwic 女性 --show 5
 ```
-The --top option only affects the number of results displayed in the terminal; complete concordance and KWIC results are saved to the corresponding JSON files regardless of this setting.
 
 <details>
 <summary> click here to show example output </summary>
@@ -332,39 +345,109 @@ KWIC results saved to: data\results\kwic_results.json
 
 </details> 
 
+---
+
 ### **N-gram Analysis**
+The `ngram` module allows you to do N-gram analyses of different sizes. Results will be saved in `data/results/`.
 
-By default, the top 20 results are displayed in the terminal for unigram, bigram, and trigram analyses.
+By default, it conducts unigram, bigram, and trigram analyses and show top 20 results for each. You can use --ngram [NUMBER] to specify the n-gram size(s) to analyse. Multiple n-gram sizes can be specified in a single command. You can also change the number of displayed results using `--show`.
 
-You can change the number of displayed results by adding `--top [NUMBER]` to your command. For example:
+Example:
 
 ```bash
-python -m toolkit.ngram
+python -m toolkit.ngram --ngram 3 4  --show 5 
 ```
 
 <details>
 <summary> click here to show example output </summary>
 
 ```text
-
+------------------------------
+Number of documents: 159
+Total tokens: 248311
+------------------------------
+> Top 5 Trigram frequencies:
+------------------------------
+中国 数字 时代 freq= 336
+CDT 报告 汇 freq= 79
+数字 时代 404 freq= 63
+时代 404 文库 freq= 59
+报告 汇 栏目 freq= 53
+------------------------------
+> Top 5 4-gram frequencies:
+------------------------------
+中国 数字 时代 404 freq= 63
+数字 时代 404 文库 freq= 59
+CDT 报告 汇 栏目 freq= 53
+报告 汇 栏目 收录 freq= 49
+汇 栏目 收录 中国 freq= 49
+--------------------------------------------------
+> N-gram analysis completed.
+N-gram results saved to: data\results\ngram_results.json
+--------------------------------------------------
 ```
 
 </details> 
+
+---
 
 ### **Corpus Search**
+
+The `corpus_search` module allows you to search the corpus using keywords, regular expressions, and part-of-speech (POS) tags. Results will be saved in `data/results/`.
+
+These three search methods are independent and can be used separately or together. Also, you can change the number of displayed results using `--show`(default: 20).
+
+Example:
+
 ```bash
-python -m toolkit.corpus_search
+python -m toolkit.corpus_search --keyword 女性 --regex "女.+" --pos ns --show 5
 ```
 
 <details>
 <summary> click here to show example output </summary>
 
 ```text
-
+------------------------------
+Corpus: data/preprocessed/
+Number of documents: 159
+------------------------------
+> Keyword search: 女性
+------------------------------
+Number of results: 220
+{'document_id': 'cdt_0031', 'position': 2044, 'token': '女性'}
+{'document_id': 'cdt_0031', 'position': 2054, 'token': '女性'}
+{'document_id': 'cdt_0031', 'position': 2247, 'token': '女性'}
+{'document_id': 'cdt_0035', 'position': 350, 'token': '女性'}
+{'document_id': 'cdt_0114', 'position': 89, 'token': '女性'}
+------------------------------
+> Regex search: 女.+
+------------------------------
+Number of results: 472
+{'document_id': 'cdt_0031', 'position': 2044, 'token': '女性'}
+{'document_id': 'cdt_0031', 'position': 2054, 'token': '女性'}
+{'document_id': 'cdt_0031', 'position': 2247, 'token': '女性'}
+{'document_id': 'cdt_0035', 'position': 350, 'token': '女性'}
+{'document_id': 'cdt_0075', 'position': 515, 'token': '子女教育'}
+------------------------------
+> POS search: POS = ns
+------------------------------
+Number of results: 8832
+{'document_id': 'cdt_0031', 'position': 17, 'token': '中国', 'pos': 'ns'}
+{'document_id': 'cdt_0031', 'position': 50, 'token': '中国', 'pos': 'ns'}
+{'document_id': 'cdt_0031', 'position': 85, 'token': '中国', 'pos': 'ns'}
+{'document_id': 'cdt_0031', 'position': 96, 'token': '中国', 'pos': 'ns'}
+{'document_id': 'cdt_0031', 'position': 105, 'token': '中国', 'pos': 'ns'}
+--------------------------------------------------
+> Corpus search completed.
+> Search results saved to: data\results\search_results.json
+--------------------------------------------------
 ```
 
 </details> 
 
+> **Notes:**
+> 1. POS tags and their meanings are listed in `data/pos_tagset.txt.`
+> 2. Optionally, use the `--raw` together with `--keyword` and/or `--regex` to search the original, unprocessed text form `data/raw/`. `--pos` cannot be used with `--raw`, as POS tags are only available for the preprocessed corpus.
 
 
 ## **6. Challenges Faced**
