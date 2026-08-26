@@ -8,7 +8,6 @@ from matplotlib import rcParams  # for displaying Chinese characters in plots
 
 # configure font for Chinese characters in plots
 rcParams["font.sans-serif"] = ["Microsoft YaHei"]
-rcParams["axes.unicode_minus"] = False
 
 # ============================================================
 # 0. define functions and command line arguments for analysis
@@ -245,7 +244,7 @@ print("Number of documents:", len(documents))
 
 # collect all tokens
 all_tokens = get_all_tokens(documents)
-print("Total tokens:", len(all_tokens))
+print("Number of tokens:", len(all_tokens))
 
 # ============================================================
 # 2. frequency analysis
