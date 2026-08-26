@@ -131,10 +131,10 @@ The preprocessed and POS-tagged data can then be processed independently by the 
 
 After installation, change the working directory in the terminal to the directory containing the `data` folder.
 
-For example, if the `data` folder is located at `A:\test\data\`:
+For example, if the `data` folder is located at `D:/Documents/test/data/`:
 
 ```bash
-cd A:\test\
+cd D:/Documents/test/
 ```
 
 All toolkit modules can then be run from the same directory.
