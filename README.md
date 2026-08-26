@@ -470,6 +470,8 @@ Several challenges were encountered during data collection, preprocessing, and c
 
 * **Understanding collocation statistics.** Different collocation measures were initially unfamiliar, particularly their statistical interpretation and differences. Course materials and explanations from the course instructor were used to understand the measures and determine how they should be incorporated into the toolkit.
 
+---
+
 > **Final Note:**  
 > <sub>This is the end of this lengthy README. I doubt anyone would actually read this far, but anyway...</sub>  
 > kudos to the CDT team for keeping an interesting corner of the Simplified Chinese internet alive <3
