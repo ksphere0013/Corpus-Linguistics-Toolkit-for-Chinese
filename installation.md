@@ -23,5 +23,5 @@
 5. Check whether the toolkit can be successfully imported:
     
     ```bash
-    python -c "import toolkit; print('Toolkit imported successfully')"
+    python -c "import toolkit; print('Toolkit imported successfully.')"
     ```
