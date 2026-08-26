@@ -126,9 +126,8 @@ The preprocessed and POS-tagged data can then be processed independently by the 
 
 ## **5. Usage Instructions and Example Commands**
 
-See `installation.md` for installation instructions.
-
----
+> **Note:**
+> See `installation.md` for installation instructions.
 
 After installation, change the working directory in the terminal to the directory containing the `data` folder.
 
