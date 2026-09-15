@@ -214,7 +214,7 @@ Total tokens after stopword removal: 17045
 </details>
 
 > **Notes:**
-> - Metadata filtering uses **partial matching** rather than exact matching.
+> - Metadata filtering uses **partial matching** rather than exact matching, and is case-insensitive.
 > - If an option parameter contains **whitespace**, enclose the parameter in quotation marks `""`.
 > - The **stopword** list used by this module is stored in `data/stopwords.json`. The list can be modified according to the research purpose.
 
