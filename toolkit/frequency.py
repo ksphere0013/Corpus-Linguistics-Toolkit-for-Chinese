@@ -157,7 +157,7 @@ def log_likelihood(
 # function for all collocation analysis above
 def collocation_analysis(
     tokens,
-    min_frequency=5
+    min_frequency = 5   # decide minimal frequency threshold for bigrams
 ):
     word_counts, bigram_counts = build_collocation_counts(tokens)
 
@@ -165,9 +165,10 @@ def collocation_analysis(
     total_bigrams = sum(bigram_counts.values())
     results = []
 
-    for (word1, word2), observed in bigram_counts.items():
-        # ignore low-frequency bigrams
-        if observed < min_frequency:
+    for (word1, word2), observed in bigram_counts.items():  # iterate over bigrams; assign each bigram's frequency to observed
+
+        if observed < min_frequency:    # ignore low-frequency bigrams
+
             continue
 
         freq1 = word_counts[word1]
@@ -221,7 +222,7 @@ def collocation_analysis(
 # ------------------------------------------------------------
 
 parser = argparse.ArgumentParser(
-    description="Run frequency and collocation analysis on preprocessed documents."
+    description="Run frequency and collocation analysis on preprocessed documents. Minimal frequency is set to 5."
 )
 parser.add_argument(
     "--show",
