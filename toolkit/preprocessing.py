@@ -47,23 +47,23 @@ def filter_documents(
         metadata = document["metadata"]
 
         if source is not None:
-            if source not in metadata.get("source"):
+            if source.lower() not in metadata.get("source").lower():
                 continue
 
         if author is not None:
-            if author not in metadata.get("author"):
+            if author.lower() not in metadata.get("author").lower():
                 continue
 
         if topic is not None:
-            if topic not in metadata.get("topic"):
+            if topic.lower() not in metadata.get("topic").lower():
                 continue
 
         if genre is not None:
-            if genre not in metadata.get("genre"):
+            if genre.lower() not in metadata.get("genre").lower():
                 continue
 
         if license is not None:
-            if license not in metadata.get("license"):
+            if license.lower() not in metadata.get("license").lower():
                 continue
 
         filtered.append(document)
@@ -202,13 +202,13 @@ parser.add_argument(
 
 parser.add_argument(
     "--genre",
-    help="filter documents by [genre]"
+    help="filter documents by keyword in [genre]"
 )
 
 parser.add_argument(
     "--license",
     dest="license_name",
-    help="filter documents by [license]"
+    help="filter documents by keyword in [license]"
 )
 
 args = parser.parse_args()

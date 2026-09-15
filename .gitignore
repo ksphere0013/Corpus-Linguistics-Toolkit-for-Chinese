@@ -2,8 +2,10 @@
 data/preprocessed
 data/pos_tagged
 data/results
+viva/
 
 # Byte-compiled / optimized / DLL files
+toolkit/__pycache__/
 __pycache__/
 *.py[codz]
 *$py.class
